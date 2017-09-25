@@ -3,6 +3,8 @@ const { oneLine } = require('common-tags');
 const path = require('path');
 const winston = require('winston');
 
+require('./structures/CommandoMessage');
+
 const SequelizeProvider = require('./providers/Sequelize');
 const { OWNERS, COMMAND_PREFIX, TOKEN } = process.env;
 
@@ -141,10 +143,11 @@ client.registry
 		['item', 'Item'],
 		['weather', 'Weather'],
 		['music', 'Music'],
-		['tags', 'Tags'],
-		['docs', 'Documentation']
+		['tags', 'Tags']
 	])
-	.registerDefaults()
+	.registerDefaultTypes()
+	.registerDefaultGroups()
+	.registerDefaultCommands({ help: false })
 	.registerTypesIn(path.join(__dirname, 'types'))
 	.registerCommandsIn(path.join(__dirname, 'commands'));
 
