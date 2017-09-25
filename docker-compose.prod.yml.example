@@ -1,0 +1,19 @@
+version: '3'
+services:
+  commando:
+    extends:
+      file: docker-compose.yml
+      service: commando
+    environment:
+      - NODE_ENV=production
+      - TOKEN=BOT_TOKEN
+
+  postgres:
+    extends:
+      file: docker-compose.yml
+      service: postgres
+
+  redis:
+    extends:
+      file: docker-compose.yml
+      service: redis
