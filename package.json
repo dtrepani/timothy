@@ -40,9 +40,11 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint .",
+    "test": "npm run lint",
+
+    "build": "docker-compose build commando",
     "restart": "docker-compose restart commando",
-    "start": "docker-compose build commando && docker-compose up -d",
-    "test": "npm run lint"
+    "start": "docker-compose up -d"
   },
   "repository": {
     "type": "git",

@@ -23,6 +23,10 @@ services:
       - PASSES=UPD_PACKET_PASS
     volumes:
       - ./assets/profile/backgrounds:/assets/profile/backgrounds
+
+      # Remove to fully isolate build (requires rebuilding container to reflect file changes)
+      - .:/usr/src/Commando
+      - /usr/src/Commando/node_modules
     depends_on:
       - postgres
       - redis
