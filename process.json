@@ -1,0 +1,11 @@
+{
+	"name": "Timothy",
+	"script": "Commando.js",
+	"node_args": "--harmony",
+	"env_production": {
+		"NODE_ENV": "production"
+	},
+	"env_development": {
+		"NODE_ENV": "development"
+	}
+}
