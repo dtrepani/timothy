@@ -29,3 +29,5 @@ docker-compose.yml
 
 assets/profile/backgrounds/**
 !assets/profile/backgrounds/default.png
+
+data

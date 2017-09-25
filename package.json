@@ -40,7 +40,8 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint .",
-    "start": "node --harmony src/index.js",
+    "restart": "docker-compose restart commando",
+    "start": "docker-compose build commando && docker-compose up -d",
     "test": "npm run lint"
   },
   "repository": {
