@@ -107,7 +107,7 @@ module.exports = class DocsCommand extends Command {
 	}
 
 	joinType(type) {
-		return type.map(t => t.map(a => Array.isArray(a) ? a.join('') : a).join('')).join(' | ');
+		return type.map(t => t.map(a => (Array.isArray(a) ? a.join('') : a)).join('')).join(' | ');
 	}
 
 	getLink(version) {

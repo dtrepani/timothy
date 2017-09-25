@@ -1,12 +1,11 @@
 {
-  "name": "commando",
-  "version": "0.28.0",
-  "description": ".",
-  "author": {
-    "name": "iCrawl",
-    "email": "icrawltogo@gmail.com"
-  },
+  "name": "timothy-bot",
+  "version": "0.1.0",
+  "description": "",
   "contributors": [
+    {
+      "name": "iCrawl"
+    },
     {
       "name": "vzwGrey"
     },
@@ -40,21 +39,14 @@
   ],
   "license": "MIT",
   "scripts": {
-    "test": "npm run lint",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "start": "node --harmony src/index.js",
+    "test": "npm run lint"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/WeebDev/Commando.git"
+    "url": "git+ssh://git@github.com/finajo/DiscordBot.git"
   },
-  "bugs": {
-    "url": "https://github.com/WeebDev/Commando/issues"
-  },
-  "keywords": [
-    "discord",
-    "bot"
-  ],
-  "homepage": "https://github.com/WeebDev/Commando#readme",
   "dependencies": {
     "Sherlock": "neilgupta/Sherlock",
     "canvas": "next",
@@ -62,9 +54,11 @@
     "discord.js": "hydrabolt/discord.js",
     "discord.js-commando": "gawdl3y/discord.js-commando",
     "erlpack": "hammerandchisel/erlpack",
+    "html-to-text": "^3.3.0",
     "moment": "^2.0.0",
     "moment-duration-format": "^1.0.0",
     "node-opus": "^0.2.0",
+    "nodemw": "^0.11.0",
     "pg": "^6.0.0",
     "pg-hstore": "^2.0.0",
     "prism-media": "hydrabolt/prism-media",
@@ -76,19 +70,16 @@
     "simple-youtube-api": "^3.0.0",
     "snekfetch": "^3.0.0",
     "tsubaki": "^1.0.0",
+    "twemoji": "^2.5.0",
     "uws": "^8.0.0",
+    "wikijs": "^4.2.1",
     "winston": "^2.0.0",
+    "wolfram-alpha": "^0.6.0",
     "ytdl-core": "^0.17.0"
   },
   "devDependencies": {
     "eslint": "^4.0.0",
     "eslint-config-aqua": "^2.0.0"
-  },
-  "eslintConfig": {
-    "extends": "aqua",
-    "rules": {
-      "no-process-env": "off"
-    }
   },
   "engines": {
     "node": ">=8.0.0"

@@ -23,7 +23,7 @@ module.exports = class SaveQueueCommand extends Command {
 		const song = queue.songs[0];
 
 		msg.reply('✔ Check your inbox!');
-		let embed = {
+		const embed = {
 			color: 3447003,
 			author: {
 				name: `${msg.author.tag} (${msg.author.id})`,

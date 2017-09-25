@@ -167,7 +167,7 @@ module.exports = class ProfileCommand extends Command {
 	_wrapText(ctx, text, maxWidth) {
 		return new Promise(resolve => {
 			const words = text.split(' ');
-			let lines = [];
+			const lines = [];
 			let line = '';
 
 			if (ctx.measureText(text).width < maxWidth) {

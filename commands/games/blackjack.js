@@ -56,7 +56,7 @@ module.exports = class BlackjackCommand extends Command {
 		).then(async () => {
 			const balance = await Currency.getBalance(msg.author.id);
 			const playerHand = blackjack.getHand();
-			let dealerHand = blackjack.getHand();
+			const dealerHand = blackjack.getHand();
 			let playerHands;
 
 			if (Blackjack.handValue(playerHand) !== 'Blackjack') {

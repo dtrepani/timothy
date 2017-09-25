@@ -69,7 +69,7 @@ module.exports = class RussianRouletteCommand extends Command {
 			let survivors = [];
 
 			for (const slot in barrel) {
-				let currentPlayer = players[slot % players.length];
+				const currentPlayer = players[slot % players.length];
 				if (!deadPlayer) deadPlayer = currentPlayer;
 			}
 
@@ -90,7 +90,7 @@ module.exports = class RussianRouletteCommand extends Command {
 	}
 
 	generateBarrel() {
-		let barrel = [0, 0, 0, 0, 0, 0];
+		const barrel = [0, 0, 0, 0, 0, 0];
 		barrel[Math.floor(Math.random() * barrel.length)] = 1;
 
 		return barrel;
