@@ -6,5 +6,4 @@
     </h1>
 </div>
 
-## About
 Timothy re-imagined (AKA I don't have time to maintain properly anymore so working off [@WeebDev](https://github.com/WeebDev)'s framework.)
