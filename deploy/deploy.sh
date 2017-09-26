@@ -26,5 +26,5 @@ else
 	echo -e "\e[36m\e[1mBuild triggered for branch \"${TRAVIS_BRANCH}\"."
 	DOCKER_RELEASE="latest"
 	test
-	docker login --username="$DOCKER_USERNAME" --password-stdin="$DOCKER_PASSWORD"
+	docker login --username="$DOCKER_USERNAME" --password="$DOCKER_PASSWORD"
 fi
