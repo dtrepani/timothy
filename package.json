@@ -38,16 +38,26 @@
     }
   ],
   "license": "MIT",
+  "config": {
+    "dc_common": "docker-compose.yml",
+    "dc_dev": "-f docker-compose.yml -f docker-compose.dev.yml",
+    "dc_prod": "-f docker-compose.yml -f docker-compose.prod.yml"
+  },
   "scripts": {
     "lint": "eslint .",
     "test": "npm run lint",
 
-    "docker-build": "docker-compose build commando",
-    "down": "docker-compose down",
-    "restart": "docker-compose restart commando",
-    "restart-all": "docker-compose down && docker-compose up -d",
-    "start": "docker-compose up -d",
-    "start-build": "docker-compose up -d --build"
+    "start": "if [[ ${NODE_ENV} == \"production\" ]]; then npm run start:prod; else npm run start:dev; fi",
+    "start:build": "if [[ ${NODE_ENV} == \"production\" ]]; then npm run build:prod; else npm run build:dev; fi",
+    "stop": "docker-compose down",
+    "restart": "docker-compose down && if [[ ${NODE_ENV} == \"production\" ]]; then npm run start:prod; else npm run start:dev; fi",
+    "restart:commando": "docker-compose restart commando",
+
+    "start:dev": "docker-compose $npm_package_config_dc_dev up -d",
+    "build:dev": "docker-compose $npm_package_config_dc_dev up -d up -d --build",
+
+    "start:prod": "docker-compose $npm_package_config_dc_prod up -d",
+    "build:prod": "docker-compose $npm_package_config_dc_prod up -d --build"
   },
   "repository": {
     "type": "git",

@@ -1,0 +1,7 @@
+version: '3'
+services:
+  commando:
+    command: ["node", "Commando.js"]
+    environment:
+      - NODE_ENV=${NODE_ENV:-production}
+      - TOKEN=BOT_TOKEN
