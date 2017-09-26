@@ -41,9 +41,13 @@
   "scripts": {
     "lint": "eslint .",
     "test": "npm run lint",
+
     "docker-build": "docker-compose build commando",
+    "down": "docker-compose down",
     "restart": "docker-compose restart commando",
-    "start": "docker-compose up -d"
+    "restart-all": "docker-compose down && docker-compose up -d",
+    "start": "docker-compose up -d",
+    "start-build": "docker-compose up -d --build"
   },
   "repository": {
     "type": "git",
