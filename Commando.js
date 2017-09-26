@@ -3,10 +3,17 @@ const { oneLine } = require('common-tags');
 const path = require('path');
 const winston = require('winston');
 
+const SequelizeProvider = require('./providers/Sequelize');
+const { OWNERS, COMMAND_PREFIX, TOKEN, AZURE_APP_INSIGHTS_KEY } = process.env;
+
 require('./structures/CommandoMessage');
 
-const SequelizeProvider = require('./providers/Sequelize');
-const { OWNERS, COMMAND_PREFIX, TOKEN } = process.env;
+const appInsights = require('applicationinsights');
+appInsights
+	.setup(AZURE_APP_INSIGHTS_KEY)
+	.setAutoCollectConsole(true)
+	.start();
+const appInsightClient = appInsights.defaultClient;
 
 const CommandoClient = require('./structures/CommandoClient');
 const client = new CommandoClient({
@@ -31,6 +38,7 @@ client.dispatcher.addInhibitor(msg => {
 	return `Has been blacklisted.`;
 });
 
+let startTime = Date.now();
 client.on('error', winston.error)
 	.on('warn', winston.warn)
 	.once('ready', () => Currency.leaderboard())
@@ -39,9 +47,14 @@ client.on('error', winston.error)
 			[DISCORD]: Client ready...
 			Logged in as ${client.user.tag} (${client.user.id})
 		`);
+
+		appInsightClient.trackMetric('Timothy startup time', Date.now() - startTime);
 	})
 	.on('disconnect', () => winston.warn('[DISCORD]: Disconnected!'))
-	.on('reconnect', () => winston.warn('[DISCORD]: Reconnecting...'))
+	.on('reconnect', () => {
+		winston.warn('[DISCORD]: Reconnecting...');
+		startTime = Date.now();
+	})
 	.on('commandRun', (cmd, promise, msg, args) =>
 		winston.info(oneLine`
 			[DISCORD]: ${msg.author.tag} (${msg.author.id})
