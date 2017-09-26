@@ -13,14 +13,7 @@
     },
     "rules": {
         "strict": ["error", "global"],
-        "valid-jsdoc": [
-            "warn",
-            {
-                "requireReturn": false,
-                "requireReturnDescription": false,
-                "requireParamDescription": false
-            }
-        ],
+        "valid-jsdoc": "off",
 
         "accessor-pairs": "warn",
         "array-callback-return": "error",

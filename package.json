@@ -41,8 +41,7 @@
   "scripts": {
     "lint": "eslint .",
     "test": "npm run lint",
-
-    "build": "docker-compose build commando",
+    "docker-build": "docker-compose build commando",
     "restart": "docker-compose restart commando",
     "start": "docker-compose up -d"
   },
@@ -52,6 +51,7 @@
   },
   "dependencies": {
     "Sherlock": "neilgupta/Sherlock",
+    "applicationinsights": "^0.22.0",
     "canvas": "next",
     "cheerio": "^0.22.0",
     "discord.js": "hydrabolt/discord.js",
@@ -81,7 +81,6 @@
     "ytdl-core": "^0.17.0"
   },
   "devDependencies": {
-    "applicationinsights": "^0.22.0",
     "eslint": "^4.0.0",
     "eslint-config-aqua": "^2.0.0"
   },
