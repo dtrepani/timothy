@@ -94,7 +94,7 @@ module.exports = class HelpCommand extends Command {
 
 	_showAllCommandsInChannel(msg) {
 		const help = this._constructCommandsHelp(msg, false, true, ', ', cmd => `${cmd.name}`);
-		return msg.embed(help);
+		return msg.replyEmbed(help);
 	}
 
 	_showCommandsInDM(msg, showAllCommands) {
