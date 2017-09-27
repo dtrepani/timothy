@@ -149,14 +149,15 @@ client.on('error', winston.error)
 
 client.registry
 	.registerGroups([
-		['info', 'Info'],
 		['economy', 'Economy'],
-		['social', 'Social'],
+		['fun', 'Fun'],
 		['games', 'Games'],
+		['info', 'Info'],
 		['item', 'Item'],
-		['weather', 'Weather'],
 		['music', 'Music'],
-		['tags', 'Tags']
+		['social', 'Social'],
+		['tags', 'Tags'],
+		['weather', 'Weather']
 	])
 	.registerDefaultTypes()
 	.registerDefaultGroups()

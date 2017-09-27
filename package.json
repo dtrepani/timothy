@@ -46,16 +46,13 @@
   "scripts": {
     "lint": "eslint .",
     "test": "npm run lint",
-
     "start": "if [[ ${NODE_ENV} == \"production\" ]]; then npm run start:prod; else npm run start:dev; fi",
     "start:build": "if [[ ${NODE_ENV} == \"production\" ]]; then npm run build:prod; else npm run build:dev; fi",
     "stop": "docker-compose down",
     "restart": "docker-compose down && if [[ ${NODE_ENV} == \"production\" ]]; then npm run start:prod; else npm run start:dev; fi",
     "restart:commando": "docker-compose restart commando",
-
     "start:dev": "docker-compose $npm_package_config_dc_dev up -d",
     "build:dev": "docker-compose $npm_package_config_dc_dev up -d up -d --build",
-
     "start:prod": "docker-compose $npm_package_config_dc_prod up -d",
     "build:prod": "docker-compose $npm_package_config_dc_prod up -d --build"
   },
