@@ -21,8 +21,8 @@ class EmojiArgumentType extends ArgumentType {
 		if (value.match(EmojiUtil.customEmojiRe)) {
 			const emoji = msg.client.emojis.get(value.match(EmojiUtil.customEmojiRe)[2]);
 			if (emoji) return emoji;
-		} else if (value.match(EmojiUtil.emojiRegex)) {
-			return value.match(EmojiUtil.emojiRegex)[0];
+		} else if (value.match(EmojiUtil.emojiRe)) {
+			return value.match(EmojiUtil.emojiRe)[0];
 		}
 	}
 }
