@@ -19,8 +19,7 @@ const CommandoClient = require('./structures/CommandoClient');
 const client = new CommandoClient({
 	owner: OWNERS.split(','),
 	commandPrefix: COMMAND_PREFIX,
-	unknownCommandResponse: false,
-	disableEveryone: true
+	unknownCommandResponse: false
 });
 
 const Currency = require('./structures/currency/Currency');
