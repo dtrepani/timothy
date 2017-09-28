@@ -111,7 +111,7 @@ CommandMessage.prototype.getCommandDisplay = function(options) {
  * @private
  */
 CommandMessage.prototype.buildCustomizedCommandDisplay = function(options) {
-	const re = new RegExp(`^(.+)${this.argString}`);
-	const cmdUsed = this.cleanContent.match(re)[1];
+	const argsRe = new RegExp(`^(.+)${this.argString}`);
+	const cmdUsed = this.content.match(argsRe)[1];
 	return `\`${cmdUsed} ${options.argsDisplay}\`: `;
 };
