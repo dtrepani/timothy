@@ -113,7 +113,7 @@ client.on('error', winston.error)
 	})
 	.on('commandError', (cmd, err) => {
 		if (err instanceof FriendlyError) return;
-		winston.error(`[DISCORD]: Error in command ${cmd.groupID}:${cmd.memberName}`, err);
+		winston.error(`[DISCORD]: Error in command ${cmd.groupID}:${cmd.memberName} >`, err);
 	})
 	.on('commandBlocked', (msg, reason) => {
 		winston.info(oneLine`

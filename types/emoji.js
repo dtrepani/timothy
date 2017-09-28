@@ -1,16 +1,5 @@
 const { ArgumentType } = require('discord.js-commando');
-const emojiRanges = [
-	'[\u0023-\u0039]\u20E3',
-	'[\u2002-\u21AA]',
-	'[\u231A-\u27bf]',
-	'[\u2934-\u2b55]',
-	'\u3030', '\u303D',
-	'\u3297', '\u3299',
-	'\uD83C[\udc04-\uDFFF]',
-	'\uD83D[\uDC00-\uDE4F]'
-];
-const emojiRegex = new RegExp(emojiRanges.join('|'), 'g');
-const regex = /<:([a-zA-Z0-9_]+):(\d+)>/;
+const EmojiUtil = require('../util/EmojiUtil');
 
 class EmojiArgumentType extends ArgumentType {
 	constructor(client) {
@@ -18,10 +7,10 @@ class EmojiArgumentType extends ArgumentType {
 	}
 
 	validate(value, msg) {
-		if (value.match(regex)) {
-			const emoji = msg.client.emojis.get(value.match(regex)[2]);
+		if (value.match(EmojiUtil.customEmojiRe)) {
+			const emoji = msg.client.emojis.get(value.match(EmojiUtil.customEmojiRe)[2]);
 			if (emoji) return true;
-		} else if (value.match(emojiRegex)) {
+		} else if (value.match(EmojiUtil.emojiRe)) {
 			return true;
 		}
 
@@ -29,11 +18,11 @@ class EmojiArgumentType extends ArgumentType {
 	}
 
 	parse(value, msg) { // eslint-disable-line consistent-return
-		if (value.match(regex)) {
-			const emoji = msg.client.emojis.get(value.match(regex)[2]);
+		if (value.match(EmojiUtil.customEmojiRe)) {
+			const emoji = msg.client.emojis.get(value.match(EmojiUtil.customEmojiRe)[2]);
 			if (emoji) return emoji;
-		} else if (value.match(emojiRegex)) {
-			return value.match(emojiRegex)[0];
+		} else if (value.match(EmojiUtil.emojiRegex)) {
+			return value.match(EmojiUtil.emojiRegex)[0];
 		}
 	}
 }
