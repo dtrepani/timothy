@@ -121,6 +121,7 @@
         "rest-spread-spacing": "error",
         "template-curly-spacing": "error",
         "yield-star-spacing": "error",
-        "no-process-env": "off"
+        "no-process-env": "off",
+        "no-warning-comments": "off"
     }
 }
