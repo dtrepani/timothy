@@ -75,6 +75,7 @@ CommandMessage.prototype.deleteMsg = function(options) {
  * @private
  */
 CommandMessage.prototype.buildReply = function(content, options) {
+	options = Object.assign({ delTimeout: 0, argsDisplay: '' }, options || {});
 	return `${this.getCommandDisplay(options)}${content}`;
 };
 
@@ -88,7 +89,7 @@ CommandMessage.prototype.getCommandDisplay = function(options) {
 		return '';
 	}
 
-	if (options && typeof options === 'object' && options.argsDisplay !== '') {
+	if (options.argsDisplay !== '') {
 		return this.buildCustomizedCommandDisplay(options);
 	}
 

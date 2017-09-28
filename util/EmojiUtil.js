@@ -57,7 +57,7 @@ module.exports = class EmojiUtil {
 
 	/**
 	 * Convert a char to its emoji equivalent. A zero-width space is added after emoji to prevent
-	 * unicode combining into other characters.
+	 * unintentional UTF16 surrogate pairs.
 	 */
 	static toEmoji(char) {
 		let emoji = '';
