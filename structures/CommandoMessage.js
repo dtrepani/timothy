@@ -30,7 +30,7 @@ const superReplyEmbed = CommandMessage.prototype.replyEmbed;
  * @extends MessageOptions
  * @property {string} [argsDisplay=''] Override the command args display. Useful if the command args are too verbose.
  * Not relevant if the message is a DM.
- * @param {number} [delTimeout=0] - How long to wait to delete the message in milliseconds
+ * @param {number} [delTimeout=0] - How long to wait to delete the message in milliseconds. Use -1 to disable deletion.
  */
 
 /**
@@ -65,18 +65,24 @@ CommandMessage.prototype.replyEmbed = function(embed, content = '', options) {
  */
 CommandMessage.prototype.deleteMsg = function(options) {
 	const timeout = options && typeof options === 'object' ? options.timeout : 0;
-	this.delete(timeout)
-		.catch(err => winston.warn(`[DISCORD]: MessageDeleteError > ${err} (Message may have already been deleted)`));
+
+	if (timeout >= 0) {
+		this.delete(timeout)
+			.catch(err => winston.warn(`[DISCORD]: MessageDeleteError > ${err} (Message may have already been deleted)`));
+	}
 };
 
 /**
- * Concat the user's command with Timothy's reply.
+ * Concat the user's command with Timothy's reply if the user's message is to be deleted.
  * @return {string}
  * @private
  */
 CommandMessage.prototype.buildReply = function(content, options) {
 	options = Object.assign({ delTimeout: 0, argsDisplay: '' }, options || {});
-	return `${this.getCommandDisplay(options)}${content}`;
+	
+	return options.delTimeout >= 0
+		? `${this.getCommandDisplay(options)}${content}`
+		: content;
 };
 
 /**
