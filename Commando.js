@@ -154,6 +154,7 @@ client.registry
 		['images', 'Random Images'],
 		['info', 'Info'],
 		['item', 'Item'],
+		['mod', 'Moderator'],
 		['music', 'Music'],
 		['social', 'Social'],
 		['tags', 'Tags'],

@@ -5,3 +5,4 @@ services:
     environment:
       - NODE_ENV=${NODE_ENV:-production}
       - TOKEN=BOT_TOKEN
+      - CLIENT_ID=BOT_CLIENT_ID
