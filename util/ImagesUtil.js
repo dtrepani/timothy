@@ -1,6 +1,7 @@
 const { MessageEmbed } = require('discord.js');
 const request = require('request-promise');
 const winston = require('winston');
+const { IMGUR_API } = process.env;
 
 module.exports = class ImagesUtil {
 	constructor() {
@@ -38,8 +39,13 @@ module.exports = class ImagesUtil {
 	 */
 	static async getImages(subreddit) { // eslint-disable-line consistent-return
 		try {
-			const res = await request.get(`https://imgur.com/r/${subreddit}/hot.json`);
-			return JSON.parse(res).data;
+			const res = await request.get({
+				url: `https://api.imgur.com/3/gallery/r/${subreddit}/hot`,
+				headers: { Authorization: `Client-ID ${IMGUR_API}` }
+			});
+			const images = JSON.parse(res).data;
+			
+			return images.map(img => (img.hasOwnProperty(images) ? img.images[0].link : img.link));
 		} catch (err) {
 			winston.warn(`[DISCORD]: GetImagesError >`, err);
 		}
@@ -51,22 +57,9 @@ module.exports = class ImagesUtil {
 	 * @param {string[]} images - Array of images 
 	 * @return {?string} - Random image, if applicable
 	 */
-	static getRandomFrom(client, key, images) {
-		if (images.length === 0) {
-			return;
+	static getRandomFrom(client, key, images) { // eslint-disable-line consistent-return
+		if (images.length > 0) {
+			return images[Math.floor(Math.random() * images.length)];
 		}
-
-		const rand = Math.floor(Math.random() * images.length);
-		const randImg = images[rand];
-
-		if (!randImg.ext) {
-			winston.warn(`[DISCORD]: GetRandomImageError >`, randImg);
-			images.splice(rand, 1);
-			client.redis.setAsync(key, JSON.stringify(images));
-			return;
-		}
-
-		const extension = randImg.ext.replace(/\?.*/, '');
-		return `http://i.imgur.com/${randImg.hash}${extension}`; // eslint-disable-line consistent-return
 	}
 };
