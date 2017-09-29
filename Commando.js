@@ -151,6 +151,7 @@ client.registry
 		['economy', 'Economy'],
 		['fun', 'Fun'],
 		['games', 'Games'],
+		['images', 'Random Images'],
 		['info', 'Info'],
 		['item', 'Item'],
 		['music', 'Music'],
