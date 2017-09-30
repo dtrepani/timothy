@@ -15,7 +15,7 @@ module.exports = class InviteCommand extends Command {
 	}
 
 	hasPermission(msg) {
-		return this.client.options.owner.indexOf(msg.author.id) !== -1;
+		return this.client.isOwner(msg.author);
 	}
 
 	run(msg) {
