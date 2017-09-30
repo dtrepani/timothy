@@ -4,7 +4,7 @@ module.exports = class CleanCommand extends Command {
 	constructor(client) {
 		super(client, {
 			name: 'clean',
-			aliases: ['purge', 'prune', 'clear'],
+			aliases: ['purge', 'prune', 'clear', 'nuke'],
 			group: 'util',
 			memberName: 'clean',
 			description: 'Deletes messages.',
@@ -46,7 +46,7 @@ module.exports = class CleanCommand extends Command {
 	}
 
 	hasPermission(msg) {
-		return this.client.isOwner(msg.author) || msg.member.roles.exists('name', 'Server Staff');
+		return this.client.isOwner(msg.author) || msg.member.hasPermission('ADMINISTRATOR');
 	}
 
 	async run(msg, { filter, limit, member }) {
