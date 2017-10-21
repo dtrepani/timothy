@@ -1,6 +1,8 @@
 const { Role } = require('discord.js');
+const DiscordUtil = require('discord.js').Util;
 const { FriendlyError } = require('discord.js-commando');
 const { winston } = require('winston');
+const { Colors } = require('./constants');
 
 class Util {
 	constructor() {
@@ -39,6 +41,31 @@ class Util {
 
 	static isUrl(item) {
 		return (item.search(/https?:\/\/[^ \/\.]+\.[^ \/\.]+/) !== -1); // eslint-disable-line no-useless-escape
+	}
+
+	/**
+	 * Resolves a ColorResolvable into a color number.
+	 * 
+	 * As of 10/21/2017, discord.js Util#resolveColor has a bug
+	 * where its isNaN check is never called, so its return value
+	 * must be manually checked.
+	 * 
+	 * @param {ColorResolvable} color Color to resolve
+	 * @returns {number} A color
+	 * @override
+	 */
+	static resolveColor(color) {
+		if (typeof color === 'string' && Colors.hasOwnProperty(color)) {
+			return Colors[color];
+		}
+
+		color = DiscordUtil.resolveColor(color);
+		
+		if (isNaN(color)) {
+			throw new TypeError('COLOR_CONVERT');
+		}
+
+		return color;
 	}
 
 	/**
