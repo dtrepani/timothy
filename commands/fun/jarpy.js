@@ -60,7 +60,7 @@ module.exports = class JarpyCommand extends Command {
 
 			await this.setJarpies(target, numOfThrows, isAlreadyJarpied);
 			msg.replyEmbed(
-				this._getJarpyEmbed(msg.member, target),
+				this.getJarpyEmbed(msg.member, target),
 				'',
 				{ argsDisplay: `\@${target.user.username}${numOfThrows === 1 ? '' : ` ${numOfThrows}`}` } // eslint-disable-line no-useless-escape, max-len
 			);
@@ -132,11 +132,11 @@ module.exports = class JarpyCommand extends Command {
 						return msg.embed(Object.assign(embed, this.baseJarpyEmbed)); // eslint-disable-line consistent-return, max-len
 					});
 			},
-			5000 // 60000
+			60000
 		);
 	}
 
-	_getJarpyEmbed(jarpier, target) {
+	getJarpyEmbed(jarpier, target) {
 		const embed = new Discord.MessageEmbed({
 			title: '💕💕💕💕💕💕💕💕',
 			description: `${target} (@${target.user.username}) **just got jarpied by ${jarpier}!**`
