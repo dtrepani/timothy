@@ -30,11 +30,6 @@ class Util {
 		return (!isNaN(number) && isFinite(number));
 	}
 
-	static isSplatRole(role) {
-		const splatPrefix = 'Splat ';
-		return role.name.substr(0, splatPrefix.length) === splatPrefix;
-	}
-
 	static isString(str) {
 		return typeof str === 'string' || str instanceof String;
 	}
@@ -104,7 +99,7 @@ class Util {
 		} catch (err) {
 			winston.warn(`[DISCORD]: CreateAndAddMemberToRoleError >`, err);
 			throw new FriendlyError(
-				`There was a problem creating the \`${roleData.name}\` role and adding \`${member.displayName}\` to it.`
+				`There was a problem creating the \`${roleData.name}\` role and adding ${member.displayName} to it.`
 			);
 		}
 	}

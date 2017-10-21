@@ -45,7 +45,7 @@ module.exports = class CleverbotCommand extends Command {
 				errMsg = `${errInfo.status}: ${errInfo.error}`;
 			}
 
-			winston.error(`[DISCORD]: CleverBotError:`, errMsg);
+			winston.error(`[DISCORD]: CleverBotError >`, errMsg);
 			throw new FriendlyError(err);
 		}
 	}

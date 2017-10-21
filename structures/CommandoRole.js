@@ -23,7 +23,7 @@ Role.prototype.setColor = function(color, reason) {
 		throw new FriendlyError(`I cannot change the color of \`@everyone\``);
 	}
 
-	if (this.comparePositionTo(timothyMember.highestRole) > 0) {
+	if (this.comparePositionTo(timothyMember.highestRole) >= 0) {
 		throw new FriendlyError(
 			`My role is not high enough to set the color of the role \`${this.name}\``
 		);

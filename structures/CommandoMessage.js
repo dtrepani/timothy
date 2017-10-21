@@ -3,8 +3,8 @@ const winston = require('winston');
 
 /**
  * Responds with a direct message with only an embed.
- * @param {MessageEmbed} [embed] Embed for the message
- * @param {?MessageOptions} [options] Options for the message
+ * @param {MessageEmbed} embed Embed for the message
+ * @param {MessageOptions} [options] Options for the message
  * @return {Promise<Message|Message[]>}
  */
 CommandMessage.prototype.directEmbed = function(embed, options) {
@@ -35,7 +35,7 @@ const superReplyEmbed = CommandMessage.prototype.replyEmbed;
 
 /**
  * @param {StringResolvable} [content] Content for the message
- * @param {?MessageOptionsExt} [options] Options for the message
+ * @param {MessageOptionsExt} [options] Options for the message
  * @return {Promise<Message|Message[]>}
  * @see {@link CommandMessage#reply}
  */
@@ -47,7 +47,7 @@ CommandMessage.prototype.reply = function(content, options) {
 /**
  * @param {MessageEmbed|Object} [embed] Embed to send
  * @param {StringResolvable} [content=''] Content for the message
- * @param {?MessageOptionsExt} [options] Options for the message
+ * @param {MessageOptionsExt} [options] Options for the message
  * @return {Promise<Message|Message[]>}
  * @see {@link CommandMessage#replyEmbed}
  */
@@ -58,7 +58,7 @@ CommandMessage.prototype.replyEmbed = function(embed, content = '', options) {
 
 /**
  * Shortcut to `this.delete()` with error catch
- * @param {?MessageOptionsExt} [options] Options for the message
+ * @param {MessageOptionsExt} [options] Options for the message
  * @returns {Promise<Message>}
  * @see {@link CommandMessage#delete}
  * @private

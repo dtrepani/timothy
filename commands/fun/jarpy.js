@@ -2,7 +2,6 @@ const { Command, FriendlyError } = require('discord.js-commando');
 const Discord = require('discord.js');
 const Util = require('../../util/Util');
 const winston = require('winston');
-const moment = require('moment');
 
 module.exports = class JarpyCommand extends Command {
 	constructor(client) {
@@ -38,7 +37,7 @@ module.exports = class JarpyCommand extends Command {
 
 		this.baseJarpyEmbed = {
 			thumbnail: { url: 'http://i.imgur.com/IM50OVK.png' }, // TODO: upload to personal imgur
-			color: Discord.Util.resolveColor('#E494A0')
+			color: Util.resolveColor('#E494A0')
 		};
 	}
 
@@ -59,27 +58,27 @@ module.exports = class JarpyCommand extends Command {
 				isAlreadyJarpied = false;
 			}
 
-			await this._setJarpies(target, numOfThrows, isAlreadyJarpied);
+			await this.setJarpies(target, numOfThrows, isAlreadyJarpied);
 			msg.replyEmbed(
 				this._getJarpyEmbed(msg.member, target),
 				'',
 				{ argsDisplay: `\@${target.user.username}${numOfThrows === 1 ? '' : ` ${numOfThrows}`}` } // eslint-disable-line no-useless-escape, max-len
 			);
 			
-			return this._clearJarpies(msg, target, origNickname);
+			return this.clearJarpies(msg, target, origNickname);
 		} catch (err) {
 			winston.warn(`[DISCORD]: JarpyError >`, err);
 			throw new FriendlyError(`I can't jarpy that user. Ask the server's owner to move my role rank up.`);
 		}
 	}
 
-	async _setJarpies(target, numOfThrows, isAlreadyJarpied) {
+	async setJarpies(target, numOfThrows, isAlreadyJarpied) {
 		const nickname = target.nickname || target.user.username;
-		await target.setNickname(this._getJarpiedName(nickname, numOfThrows, isAlreadyJarpied));
+		await target.setNickname(this.getJarpiedName(nickname, numOfThrows, isAlreadyJarpied));
 	}
 
-	_getJarpiedName(nickname, numOfThrows, isAlreadyJarpied) {
-		if (this._isFullyJarpied(nickname)) {
+	getJarpiedName(nickname, numOfThrows, isAlreadyJarpied) {
+		if (this.isFullyJarpied(nickname)) {
 			return nickname;
 		}
 
@@ -109,11 +108,11 @@ module.exports = class JarpyCommand extends Command {
 	 * Users with a nickname of hearts cannot be jarpied any further.
 	 * @private
 	 */
-	_isFullyJarpied(nickname) {
+	isFullyJarpied(nickname) {
 		return nickname === this.heart.repeat(this.maxNameLen);
 	}
 
-	_clearJarpies(msg, target, origNickname) {
+	clearJarpies(msg, target, origNickname) {
 		const jarpyTimeout = this.jarpyTimeouts[target.user.id];
 		if (jarpyTimeout) {
 			this.client.clearTimeout(jarpyTimeout.data.handleId);

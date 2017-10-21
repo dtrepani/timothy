@@ -47,18 +47,7 @@ module.exports = class ColorCommand extends Command {
 			color
 		}));
 
-		this.client.setTimeout(async () => {
-			try {
-				await role.delete();
-				msg.embed(new Discord.MessageEmbed({
-					description: `${target.displayName} is back to their original color! 🎉`,
-					color
-				}));
-			} catch (err) {
-				winston.warn(`[DISCORD]: SplatDeleteRoleError >`, err);
-				msg.say(`I had some trouble setting ${target.displayName} back to their original color...`);
-			}
-		}, 60000);
+		this.setUnsplatTimeout(role);
 	}
 
 	/**
@@ -104,5 +93,23 @@ module.exports = class ColorCommand extends Command {
 	 */
 	getReason(member) {
 		return `Splat command, triggered by ${member.user.tag}`;
+	}
+
+	/**
+	 * @private
+	 */
+	setUnsplatTimeout(msg, { color, target }, role) {
+		this.client.setTimeout(async () => {
+			try {
+				await role.delete();
+				msg.embed(new Discord.MessageEmbed({
+					description: `${target.displayName} is back to their original color! 🎉`,
+					color
+				}));
+			} catch (err) {
+				winston.warn(`[DISCORD]: SplatDeleteRoleError >`, err);
+				msg.say(`I had some trouble setting ${target.displayName} back to their original color...`);
+			}
+		}, 60000);
 	}
 };

@@ -27,7 +27,7 @@ module.exports = class GoodShitCommand extends Command {
 			const output = this.list[Math.floor(Math.random() * this.list.length)];
 			return msg.reply(output);
 		} catch (err) {
-			winston.error('[DISCORD]: GoodShitFileReadError:', err);
+			winston.error('[DISCORD]: GoodShitFileReadError >', err);
 			return msg.reply(oneLine`👌👀👌👀👌👀👌👀👌👀 good shit go౦ԁ sHit👌 thats ✔ some good👌👌shit 
 				right👌👌th 👌 ere👌👌👌 right✔there ✔✔if i do ƽaү so my selｆ 💯 i say so 💯 thats what im talking 
 				about right there right there (chorus: ʳᶦᵍʰᵗ ᵗʰᵉʳᵉ) mMMMMᎷМ💯 👌👌 👌НO0ОଠＯOOＯOОଠଠOoooᵒᵒᵒᵒᵒᵒᵒᵒᵒ👌 

@@ -31,7 +31,7 @@ module.exports = class EightBallCommand extends Command {
 				fs.accessSync(pathName, fs.constants.F_OK);
 				this.answers = JSON.parse(fs.readFileSync(pathName));
 			} catch (err) {
-				winston.error('[DISCORD]: 8BallFileReadError:', err);
+				winston.error('[DISCORD]: 8BallFileReadError >', err);
 				return msg.reply('lol :8ball:');
 			}
 		}

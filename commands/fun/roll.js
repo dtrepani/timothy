@@ -41,7 +41,7 @@ module.exports = class RollCommand extends Command {
 	}
 
 	run(msg, args) {
-		const diceRolls = this._rollAllDice(args.roll);
+		const diceRolls = this.rollAllDice(args.roll);
 		const rollTotal = diceRolls.reduce((roll1, roll2) => (roll1 + roll2), 0);
 		const diceRollsStr = ((diceRolls.length > 1)
 			? `[${diceRolls.join(' + ')}]`
@@ -55,11 +55,11 @@ module.exports = class RollCommand extends Command {
 	 * @return {integer} Each dice roll
 	 * @private
 	 */
-	_rollAllDice(roll) {
+	rollAllDice(roll) {
 		const diceRolls = [];
 
 		for (let i = 0; i < roll.numOfDice; i++) {
-			diceRolls.push(this._rollSingleDice(roll.numOfSides));
+			diceRolls.push(this.rollSingleDice(roll.numOfSides));
 		}
 
 		return diceRolls;
@@ -69,7 +69,7 @@ module.exports = class RollCommand extends Command {
 	 * @return {integer}
 	 * @private
 	 */
-	_rollSingleDice(numOfSides) {
+	rollSingleDice(numOfSides) {
 		return Math.floor(Math.random() * numOfSides) + 1;
 	}
 };
