@@ -6,7 +6,10 @@ const winston = require('winston');
 const SequelizeProvider = require('./providers/Sequelize');
 const { OWNERS, COMMAND_PREFIX, TOKEN, AZURE_APP_INSIGHTS_KEY } = process.env;
 
+// Extensions for their respective classes
 require('./structures/CommandoMessage');
+require('./structures/CommandoRole');
+require('./structures/CommandoGuildMember');
 
 const appInsights = require('applicationinsights');
 appInsights
