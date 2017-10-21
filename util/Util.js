@@ -66,7 +66,7 @@ class Util {
 	 * @return {Role}
 	 * @private
 	 */
-	async createAndAddMemberToRole(roleData, member, reason) {
+	static async createAndAddMemberToRole(roleData, member, reason) {
 		try {
 			const role = await member.guild.createRole({
 				data: roleData,
