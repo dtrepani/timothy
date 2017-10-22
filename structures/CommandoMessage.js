@@ -1,3 +1,4 @@
+const { Util } = require('discord.js');
 const { CommandMessage } = require('discord.js-commando');
 const winston = require('winston');
 
@@ -34,7 +35,7 @@ const superReplyEmbed = CommandMessage.prototype.replyEmbed;
  */
 
 /**
- * @param {StringResolvable} [content] Content for the message
+ * @param {StringResolvable} content Content for the message
  * @param {MessageOptionsExt} [options] Options for the message
  * @return {Promise<Message|Message[]>}
  * @see {@link CommandMessage#reply}
@@ -45,7 +46,7 @@ CommandMessage.prototype.reply = function(content, options) {
 };
 
 /**
- * @param {MessageEmbed|Object} [embed] Embed to send
+ * @param {MessageEmbed|Object} embed Embed to send
  * @param {StringResolvable} [content=''] Content for the message
  * @param {MessageOptionsExt} [options] Options for the message
  * @return {Promise<Message|Message[]>}
@@ -70,6 +71,19 @@ CommandMessage.prototype.deleteMsg = function(options) {
 		this.delete(timeout)
 			.catch(err => winston.warn(`[DISCORD]: MessageDeleteError > ${err} (Message may have already been deleted)`));
 	}
+};
+
+/**
+ * Wrap reply in code block.
+ * @param {StringResolvable} content Content for the message
+ * @param {string} [lang='md'] - Language for the code block, defaults to markdown
+ * @param {MessageOptionsExt} [options] Options for the message
+ * @return {Promise<Message|Message[]>}
+ * @see {@link CommandMessage#code}
+ */
+CommandMessage.prototype.replyCode = function(content, lang = 'md', options) {
+	content = `\`\`\`${lang || ''}\n${Util.escapeMarkdown(content, true)}\n\`\`\``;
+	return this.reply(content, options);
 };
 
 /**
