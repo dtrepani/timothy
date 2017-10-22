@@ -28,7 +28,7 @@ module.exports = class ImagesUtil {
 			cache = JSON.parse(cache);
 		}
 
-		const image = { url: ImagesUtil.getRandomFrom(client, key, cache) || defaultImg };
+		const image = { url: ImagesUtil.getRandomFrom(cache) || defaultImg };
 		return new MessageEmbed({ image });
 	}
 
@@ -52,12 +52,10 @@ module.exports = class ImagesUtil {
 	}
 
 	/**
-	 * @param {CommandoClient} client - Commando client
-	 * @param {string} subreddit - Subreddit to pull from
 	 * @param {string[]} images - Array of images 
 	 * @return {?string} - Random image, if applicable
 	 */
-	static getRandomFrom(client, key, images) { // eslint-disable-line consistent-return
+	static getRandomFrom(images) { // eslint-disable-line consistent-return
 		if (images.length > 0) {
 			return images[Math.floor(Math.random() * images.length)];
 		}
