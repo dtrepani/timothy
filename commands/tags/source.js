@@ -11,7 +11,6 @@ module.exports = class TagSourceCommand extends Command {
 			group: 'tags',
 			memberName: 'source',
 			description: 'Displays a tags source.',
-			guildOnly: true,
 			throttling: {
 				usages: 2,
 				duration: 3
