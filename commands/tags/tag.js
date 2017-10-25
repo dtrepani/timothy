@@ -1,6 +1,5 @@
 const { Command } = require('discord.js-commando');
-
-const Tag = require('../../models/Tag');
+const TagRepo = require('../../structures/repos/TagRepo');
 
 module.exports = class TagCommand extends Command {
 	constructor(client) {
@@ -9,7 +8,6 @@ module.exports = class TagCommand extends Command {
 			group: 'tags',
 			memberName: 'tag',
 			description: 'Displays a tag.',
-			guildOnly: true,
 			throttling: {
 				usages: 2,
 				duration: 3
@@ -27,11 +25,8 @@ module.exports = class TagCommand extends Command {
 		});
 	}
 
-	async run(msg, { name }) {
-		const tag = await Tag.findOne({ where: { name, guildID: msg.guild.id } });
-		if (!tag) return null;
-		tag.increment('uses');
-
-		return msg.say(tag.content);
+	async run(msg, args) {
+		const tag = await TagRepo.get(args);
+		return msg.reply(`\n${tag.content}`);
 	}
 };
