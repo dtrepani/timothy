@@ -1,4 +1,4 @@
-import { EmojiMap, EmojiReRanges } from './constants';
+const { EmojiMap, EmojiReRanges } = require('./constants');
 
 module.exports = class EmojiUtil {
 	constructor() {
